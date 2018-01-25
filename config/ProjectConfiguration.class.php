@@ -8,6 +8,8 @@ class ProjectConfiguration extends sfProjectConfiguration
   public function setup()
   {
     // for compatibility / remove and enable only the plugins you want
-    $this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin'));
+    $this->enablePlugins(array('sfDoctrinePlugin'));
+    $this->disablePlugins(array('sfPropelPlugin'));
+    //$this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin'));
   }
 }
