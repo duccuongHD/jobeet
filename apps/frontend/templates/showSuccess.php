@@ -12,27 +12,27 @@
 <?php if ($pager->haveToPaginate()): ?>
   <div class="pagination">
     <a href="<?php echo url_for('category', $category) ?>?page=1">
-      <img src="/legacy/images/first.png" alt="First page" />
+    <img src="/uploads/jobs/<?php echo $job->getLogo() ?>" alt="<?php echo $job->getCompany() ?> logo" />
     </a>
  
     <a href="<?php echo url_for('category', $category) ?>?page=<?php echo $pager->getPreviousPage() ?>">
-      <img src="/legacy/images/previous.png" alt="Previous page" title="Previous page" />
+    <img src="/uploads/jobs/<?php echo $job->getLogo() ?>" alt="<?php echo $job->getCompany() ?> logo" />
     </a>
  
     <?php foreach ($pager->getLinks() as $page): ?>
       <?php if ($page == $pager->getPage()): ?>
         <?php echo $page ?>
       <?php else: ?>
-        <a href="<?php echo url_for('category', $category) ?>?page=<?php echo $page ?>"><?php echo $page ?></a>
+      <img src="/uploads/jobs/<?php echo $job->getLogo() ?>" alt="<?php echo $job->getCompany() ?> logo" />
       <?php endif; ?>
     <?php endforeach; ?>
  
     <a href="<?php echo url_for('category', $category) ?>?page=<?php echo $pager->getNextPage() ?>">
-      <img src="/legacy/images/next.png" alt="Next page" title="Next page" />
+     <a href="<?php echo url_for('job_edit', $job) ?>">Edit</a>
     </a>
  
     <a href="<?php echo url_for('category', $category) ?>?page=<?php echo $pager->getLastPage() ?>">
-      <img src="/legacy/images/last.png" alt="Last page" title="Last page" />
+    <img src="/uploads/jobs/<?php echo $job->getLogo() ?>" alt="<?php echo $job->getCompany() ?> logo" />
     </a>
   </div>
 <?php endif; ?>

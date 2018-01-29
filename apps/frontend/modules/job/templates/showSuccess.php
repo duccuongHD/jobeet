@@ -12,7 +12,7 @@
     <?php echo $job->getPosition() ?>
     <small> - <?php echo $job->getType() ?></small>
   </h3>
- 
+  <a href="<?php echo url_for('job_edit', $job) ?>">Edit</a>
   <?php if ($job->getLogo()): ?>
     <div class="logo">
       <a href="<?php echo $job->getUrl() ?>">

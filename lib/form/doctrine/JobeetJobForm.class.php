@@ -13,22 +13,24 @@ class JobeetJobForm extends BaseJobeetJobForm
   {
     unset(
       $this['created_at'], $this['updated_at'],
-      $this['expires_at'], $this['is_activated']
+      $this['expires_at'], $this['is_activated'],
+      $this['token']
     );
  
     $this->validatorSchema['email'] = new sfValidatorEmail();
  
     $this->widgetSchema['type'] = new sfWidgetFormChoice(array(
-      'choices' => array_keys(Doctrine::getTable('JobeetJob')->getTypes()),
+      'choices'  => Doctrine::getTable('JobeetJob')->getTypes(),
       'expanded' => true,
     ));
-    // $this->validatorSchema['type'] = new sfValidatorChoice(array(
-    //   'choices' => array_keys(JobeetJobPeer::$types),
-    // ));
+    $this->validatorSchema['type'] = new sfValidatorChoice(array(
+      'choices' => array_keys(Doctrine::getTable('JobeetJob')->getTypes()),
+    ));
  
     $this->widgetSchema['logo'] = new sfWidgetFormInputFile(array(
       'label' => 'Company logo',
     ));
+
     $this->validatorSchema['logo'] = new sfValidatorFile(array(
       'required'   => false,
       'path'       => sfConfig::get('sf_upload_dir').'/jobs',

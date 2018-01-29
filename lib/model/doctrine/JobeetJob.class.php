@@ -5,6 +5,26 @@
  */
 class JobeetJob extends BaseJobeetJob
 {
+    public function getTypeName()
+    {
+        $types = Doctrine::getTable('JobeetJob')->getTypes();
+        return $this->getType() ? $types[$this->getType()] : '';
+    }
+ 
+    public function isExpired()
+    {
+        return $this->getDaysBeforeExpires() < 0;
+    }
+ 
+    public function expiresSoon()
+    {
+        return $this->getDaysBeforeExpires() < 5;
+    }
+ 
+    public function getDaysBeforeExpires()
+    {
+        return floor(($this->getExpiresAt('U') - time()) / 86400);
+    }
     public function save(Doctrine_Connection $conn = null)
     {
         if ($this->isNew() && !$this->getExpiresAt())
@@ -12,7 +32,12 @@ class JobeetJob extends BaseJobeetJob
           $now = $this->getCreatedAt() ? strtotime($this->getCreatedAt()) : time();
           $this->setExpiresAt(date('Y-m-d h:i:s', $now + 86400 * sfConfig::get('app_active_days')));
         }
-       
+
+        if (!$this->getToken())
+        {
+            $this->setToken(sha1($this->getEmail().rand(11111, 99999)));
+        }
+
         return parent::save($conn);
     }
     public function getCompanySlug()
@@ -28,6 +53,12 @@ class JobeetJob extends BaseJobeetJob
     public function getLocationSlug()
     {
         return Jobeet::slugify($this->getLocation());
+    }
+
+    public function publish()
+    {
+        $this->setIsActivated(true);
+        $this->save();
     }
 
 }

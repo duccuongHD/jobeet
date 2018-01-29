@@ -1,8 +1,5 @@
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
-
-<?php include_stylesheets_for_form($form) ?>
-<?php include_javascripts_for_form($form) ?>
  
 <?php echo form_tag_for($form, '@job') ?>
   <table id="job_form">
