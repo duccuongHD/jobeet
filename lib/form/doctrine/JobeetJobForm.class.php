@@ -19,10 +19,11 @@ class JobeetJobForm extends BaseJobeetJobForm
  
     $this->validatorSchema['email'] = new sfValidatorEmail();
  
-    $this->widgetSchema['type'] = new sfWidgetFormChoice(array(
-      'choices'  => Doctrine::getTable('JobeetJob')->getTypes(),
-      'expanded' => true,
-    ));
+    $this->widgetSchema->setNameFormat('job[%s]');
+    // $this->widgetSchema['type'] = new sfWidgetFormChoice(array(
+    //   'choices'  => Doctrine::getTable('JobeetJob')->getTypes(),
+    //   'expanded' => true,
+    // ));
     $this->validatorSchema['type'] = new sfValidatorChoice(array(
       'choices' => array_keys(Doctrine::getTable('JobeetJob')->getTypes()),
     ));

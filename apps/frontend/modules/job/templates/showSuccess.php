@@ -4,7 +4,7 @@
 <?php if ($sf_request->getParameter('token') == $job->getToken()): ?>
   <?php include_partial('job/admin', array('job' => $job)) ?>
 <?php endif; ?>
-
+<a href="<?php echo url_for('job_edit', $job) ?>">Edit</a>
 <div id="job">
   <h1><?php echo $job->getCompany() ?></h1>
   <h2><?php echo $job->getLocation() ?></h2>
@@ -12,7 +12,6 @@
     <?php echo $job->getPosition() ?>
     <small> - <?php echo $job->getType() ?></small>
   </h3>
-  <a href="<?php echo url_for('job_edit', $job) ?>">Edit</a>
   <?php if ($job->getLogo()): ?>
     <div class="logo">
       <a href="<?php echo $job->getUrl() ?>">
