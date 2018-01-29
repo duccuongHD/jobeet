@@ -1,4 +1,6 @@
 <h1>New Job</h1>
-<h2><?php echo sfConfig::get('app_test_name') ?></h2>
-
+<?php use_stylesheet('job.css') ?>
+ 
+<h1>Post a Job</h1>
+ 
 <?php include_partial('form', array('form' => $form)) ?>
